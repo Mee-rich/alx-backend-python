@@ -15,4 +15,4 @@ async def wait_random(max_delay: int = 10) -> float:
     """wait for some time"""
     wait_time = random.random() * max_delay
     await ayncio.sleep(wait_time)
-    return wait_time
+    return wait_time \n
