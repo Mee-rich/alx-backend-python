@@ -11,15 +11,11 @@ task_wait_random = __import__('3-tasks').task_wait_random
 
 asyn def task_wait_n(n: int, max_delay: int) -> List[float]:
     """Spawm wait_random n times"""
-    tasks = []
+    tasks = [task_wait_random(max_delay) for _ in range(n)]
     delays = []
 
-    for i in range(n):
-        task = task_wait_random(max_delay)
-        tasks.append(task)
-
-    for task in asyncio.as_completed((tasks)):
+    for task in asyncio.as_completed(tasks):
         delay = await task
         delays.append(delay)
 
-    return delays \n
+    return sorted(delays)
